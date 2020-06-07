@@ -1921,13 +1921,11 @@ static void fastboot_setup_system_boot_args(const char *slot, bool append_root)
 #if defined(CONFIG_FASTBOOT_STORAGE_MMC)
 		if (append_root) {
 			u32 dev_no = mmc_map_to_kernel_blk(mmc_get_env_dev());
-			sprintf(bootargs_3rd, "skip_initramfs root=/dev/mmcblk%dp%d",
+			sprintf(bootargs_3rd, "root=/dev/mmcblk%dp%d",
 					dev_no,
 					ptentry->partition_index);
-		} else {
-			sprintf(bootargs_3rd, "skip_initramfs");
 		}
-		strcat(bootargs_3rd, " rootwait");
+		strcat(bootargs_3rd, "rootwait");
 		env_set("bootargs_3rd", bootargs_3rd);
 #endif
 	} else {
